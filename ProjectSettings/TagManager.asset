@@ -10,6 +10,14 @@ TagManager:
   - Enemy
   - Block
   - AtkSlid
+  - LevelUpStat
+  - LevelAbility1
+  - LevelAbility2
+  - LevelAbility3
+  - LevelAbility4
+  - LevelChara
+  - ExpBar
+  - CharaIcon
   layers:
   - Default
   - TransparentFX

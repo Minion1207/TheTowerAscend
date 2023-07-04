@@ -6,6 +6,7 @@ public class ShootProjectile : MonoBehaviour
 {
     public float dam;
     public float ProjectileSpeed;
+    public float ProjectileLife;
     public float Timer;
     public GameObject Arrow;
     public Transform SpawnPoint;
@@ -31,6 +32,7 @@ public class ShootProjectile : MonoBehaviour
             {
                 projectile.damage = dam;
                 projectile.Speed = ProjectileSpeed;
+                projectile.LifeTime = ProjectileLife;
             }
         }
     }

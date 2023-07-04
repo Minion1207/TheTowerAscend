@@ -8,6 +8,8 @@ public class EHealth : MonoBehaviour
     public float Health = 1;
     public float EHealthMax = 10;
     public float Defense = 5;
+    public float ExpAmount;
+    public GameObject SoulFragment;
     public TextMeshProUGUI damAmount;
     public GameObject textObject;
 
