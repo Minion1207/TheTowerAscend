@@ -4062,9 +4062,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dam: 4
-  ProjectileSpeed: 2
+  ProjectileSpeed: 5
   ProjectileLife: 3
-  Timer: 3
+  Timer: 1
+  Direction: 0
+  Shoot: 0
+  Track: 0
+  Follow: 0
   Arrow: {fileID: 4459955153600518745, guid: 64d650a000592384881dbe5ae9d6fad9, type: 3}
   SpawnPoint: {fileID: 1763745148}
 --- !u!114 &1527584533
