@@ -49,6 +49,15 @@ public class Movement : MonoBehaviour
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
+        if(moveHorizontal == 0 && moveVertical == 0)
+        {
+            anim.SetBool("IsRunning", false);
+        }
+        else
+        {
+            anim.SetBool("IsRunning", true);
+        }
+
         ChooseDirection();
 
         desiredVelocity = new Vector2(moveHorizontal, moveVertical);
