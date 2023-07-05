@@ -7,6 +7,7 @@ public class AttackLight : MonoBehaviour
 {
     public float Damage;
     public float HeavyDam;
+    public float critChance;
 
     private float slidVal;
 
@@ -33,7 +34,17 @@ public class AttackLight : MonoBehaviour
     public void Update()
     {
 
-        float damAmount = bs.Power * 3;
+        float damAmount = bs.Power;
+        
+        if(critChance <= bs.Luck)
+        {
+            damAmount = bs.Power * 4;
+        }
+        else if(critChance > bs.Luck)
+        {
+            damAmount = bs.Power * 2;
+        }
+
         Damage = damAmount;
         HeavyDam = damAmount * 1.5f;
 
@@ -78,6 +89,9 @@ public class AttackLight : MonoBehaviour
 
     public void ChargeAttack()
     {
+
+        critChance = Random.Range(1, 100);
+
         AttackSlide.SetActive(true);
         AttackSlide.GetComponent<Slider>().value = slidVal;
         slidVal += bs.Moxie * Time.deltaTime;
