@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - StaBar
+  - HPBar
+  - MPBar
+  - Enemy
+  - Block
+  - AtkSlid
+  - LevelUpStat
+  - LevelAbility1
+  - LevelAbility2
+  - LevelAbility3
+  - LevelAbility4
+  - LevelChara
+  - ExpBar
+  - CharaIcon
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Post processing
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - Global
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Hud Icons
+    uniqueID: 4119322137
+    locked: 0
