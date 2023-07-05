@@ -2,12 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 public class Movement : MonoBehaviour
+
+
 {
     public float normalSpeed = 5f;
     public float boostSpeed = 25f;
     public float boostDuration = 0.25f;
     public float dashCost = 5;
     public bool dashing = false;
+    
 
     public float currentSpeed;
     public int direction;
@@ -21,10 +24,14 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        if (rb==null)
+        {print ("rbisnull"); }
         sta = GetComponent<Stamina>();
         bs = GetComponent<BaseStats>();
         anim = gameObject.transform.GetChild(0).gameObject.GetComponent<Animator>();
         currentSpeed = normalSpeed;
+
+
     }
 
     private void Update()
@@ -120,4 +127,9 @@ public class Movement : MonoBehaviour
         dashing = false;
         currentSpeed = normalSpeed;
     }
+
+
+        Rigidbody m_Rigidbody;
+
+
 }
