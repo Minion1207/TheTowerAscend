@@ -66,6 +66,7 @@ public class EHealth : MonoBehaviour
 
     public void DeathAmount()
     {
+        Instantiate(SoulFragment, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 

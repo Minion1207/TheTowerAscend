@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AttackLight : MonoBehaviour
+public class AttackBase : MonoBehaviour
 {
     public float Damage;
     public float HeavyDam;
