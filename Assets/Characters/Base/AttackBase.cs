@@ -41,12 +41,10 @@ public class AttackLight : MonoBehaviour
         
         if(critChance <= bs.Luck)
         {
-            isCrit = true;
             damAmount = bs.Power * 4;
         }
         else if(critChance > bs.Luck)
         {
-            isCrit = false;
             damAmount = bs.Power * 2;
         }
 
@@ -64,14 +62,11 @@ public class AttackLight : MonoBehaviour
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
 
-                if(isCrit)
-                {
+
                     sR.color = Color.yellow;
-                }
-                else if(!isCrit)
-                {
+
                     sR.color = Color.red;
-                }
+
 
                 ReleaseAttack();
             }
