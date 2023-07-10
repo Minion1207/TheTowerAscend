@@ -11,6 +11,8 @@ public class EProjectile : MonoBehaviour
     public bool shootTowardsPlayer;
     public bool followPlayer;
 
+    private float angle;
+
     private Transform playerTransform;
     private Vector3 playerDirection;
 
@@ -18,17 +20,22 @@ public class EProjectile : MonoBehaviour
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         playerDirection = (playerTransform.position - transform.position).normalized;
+        angle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg + 90;
     }
 
     void Update()
     {
+
         if (shootTowardsPlayer)
         {            
             transform.position += playerDirection * Speed * Time.deltaTime;
+            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
         else if (followPlayer)
         {
-            transform.position += (playerTransform.position - transform.position).normalized * Speed * Time.deltaTime;
+            Vector3 playerDirection = (playerTransform.position - transform.position).normalized;
+            transform.position += playerDirection * Speed * Time.deltaTime;
+            transform.rotation = Quaternion.LookRotation(Vector3.forward, -playerDirection);
         }
         else
         {
@@ -40,6 +47,8 @@ public class EProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
