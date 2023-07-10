@@ -10,6 +10,7 @@ public class EProjectile : MonoBehaviour
     public Vector3 direction;
     public bool shootTowardsPlayer;
     public bool followPlayer;
+    public bool Melee;
 
     private float angle;
 
@@ -21,13 +22,18 @@ public class EProjectile : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         playerDirection = (playerTransform.position - transform.position).normalized;
         angle = Mathf.Atan2(playerDirection.y, playerDirection.x) * Mathf.Rad2Deg + 90;
+
+        if (Melee)
+        {
+            Vector3 meleePosition = transform.position + playerDirection;
+            transform.position = meleePosition;
+        }
     }
 
     void Update()
     {
-
         if (shootTowardsPlayer)
-        {            
+        {
             transform.position += playerDirection * Speed * Time.deltaTime;
             transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
@@ -36,6 +42,11 @@ public class EProjectile : MonoBehaviour
             Vector3 playerDirection = (playerTransform.position - transform.position).normalized;
             transform.position += playerDirection * Speed * Time.deltaTime;
             transform.rotation = Quaternion.LookRotation(Vector3.forward, -playerDirection);
+        }
+        else if (Melee)
+        {
+            // Already set the melee position in Start()
+            transform.rotation = Quaternion.Euler(Vector3.forward * angle);
         }
         else
         {
@@ -47,8 +58,6 @@ public class EProjectile : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
     }
 
     void OnTriggerEnter2D(Collider2D col)

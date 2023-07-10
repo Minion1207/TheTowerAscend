@@ -8,12 +8,14 @@ public class EMovement : MonoBehaviour
     public float normalSpeed;
     public float avoidanceSpeedMultiplier;
     public float distanceBetween;
+    public float stoppingDistance;
     public float avoidForce;
     public float avoidDistance;
     public LayerMask obstacleMask; // Layer mask for obstacles
 
     private float distance;
     private bool isAvoiding = false;
+    private bool isChasing = true;
 
     private void Start()
     {
@@ -27,7 +29,13 @@ public class EMovement : MonoBehaviour
         Vector2 direction = player.transform.position - transform.position;
         direction.Normalize();
 
-        if (distance < distanceBetween)
+        if (distance < stoppingDistance)
+        {
+            // Stop moving
+            isAvoiding = false;
+            isChasing = false;
+        }
+        else if (distance < distanceBetween)
         {
             // Check for obstacles
             Collider2D obstacle = Physics2D.OverlapCircle(transform.position, avoidDistance, obstacleMask);
@@ -40,21 +48,30 @@ public class EMovement : MonoBehaviour
                 // Apply avoidance force
                 transform.position += (Vector3)avoidanceForce * GetSpeed() * Time.deltaTime;
                 isAvoiding = true;
+                isChasing = true;
             }
             else
             {
                 // No obstacle in the way, move towards the player
                 transform.position = Vector2.MoveTowards(transform.position, player.transform.position, GetSpeed() * Time.deltaTime);
                 isAvoiding = false;
+                isChasing = true;
             }
+        }
+        else
+        {
+            // Move towards the player
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, GetSpeed() * Time.deltaTime);
+            isAvoiding = false;
+            isChasing = true;
         }
     }
 
     private float GetSpeed()
     {
-        if (isAvoiding)
+        if (isAvoiding || !isChasing)
         {
-            return normalSpeed * avoidanceSpeedMultiplier;
+            return 0f; // Stop moving
         }
         else
         {

@@ -12,18 +12,34 @@ public class ShootProjectile : MonoBehaviour
     public bool Shoot;
     public bool Track;
     public bool Follow;
+    public bool Melee;
     public GameObject Arrow;
     public Transform SpawnPoint;
+    public float ShootingDistance;
+    public Transform player; // Reference to the player's transform
 
     private float TimeAmount;
 
     void Start()
     {
         TimeAmount = Timer;
+        player = GameObject.FindGameObjectWithTag("Player").gameObject.transform;
     }
 
     void Update()
     {
+        // Calculate the distance between the enemy and the player
+        float distance = Vector3.Distance(transform.position, player.position);
+
+        // Check if the player is within the shooting distance
+        if (distance <= ShootingDistance)
+        {
+            Shoot = true; // Enable shooting
+        }
+        else
+        {
+            Shoot = false; // Disable shooting
+        }
 
         if (Shoot)
         {
@@ -43,7 +59,7 @@ public class ShootProjectile : MonoBehaviour
 
                     projectile.shootTowardsPlayer = Track;
                     projectile.followPlayer = Follow;
-
+                    projectile.Melee = Melee;
 
                     if (Direction == 0)
                     {
@@ -65,11 +81,10 @@ public class ShootProjectile : MonoBehaviour
                         projectile.direction = Vector3.left;
                         obj.transform.rotation = Quaternion.Euler(new Vector3(0.0f, 0.0f, -90.0f));
                     }
-
                 }
             }
         }
-        else if(!Shoot)
+        else if (!Shoot)
         {
             TimeAmount = Timer;
         }
