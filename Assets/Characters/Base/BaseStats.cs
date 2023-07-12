@@ -21,5 +21,6 @@ public class BaseStats : MonoBehaviour
 
     [Header("Leveling")]
     public int Level;
+    public float Gold;
     public float SoulFragments;
 }
