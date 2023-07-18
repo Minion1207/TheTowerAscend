@@ -17,73 +17,12 @@ public class LevelBaseChara : MonoBehaviour
 
     private void Start()
     {
-        // Generate a random number to determine which stat will level up
-        statIndex = Random.Range(0, 11);
-
-        statName = "";
-
-        switch (statIndex)
-        {
-            case 0:
-                statName = "Health";
-                Increase = 5;
-                break;
-            case 1:
-                statName = "Mana";
-                Increase = 5;
-                break;
-            case 2:
-                statName = "Stamina";
-                Increase = 5;
-                break;
-            case 3:
-                statName = "Vitality";
-                Increase = 0.05f;
-                break;
-            case 4:
-                statName = "Spirit";
-                Increase = 0.05f;
-                break;
-            case 5:
-                statName = "Moxie";
-                Increase = 0.05f;
-                break;
-            case 6:
-                statName = "Power";
-                Increase = 1;
-                break;
-            case 7:
-                statName = "Endurance";
-                Increase = 1;
-                break;
-            case 8:
-                statName = "Agility";
-                Increase = 0.25f;
-                break;
-            case 9:
-                statName = "Luck";
-                Increase = 1;
-                break;
-            case 10:
-                statName = "SoulFragments";
-                Increase = 1;
-                break;
-            case 11:
-                statName = "Gold";
-                Increase = 10;
-                break;
-            default:
-                Debug.LogError("Invalid stat index!");
-                break;
-        }
-
-        tmpro.text = statName + " + " + Increase.ToString();
-
+        LevelUp();
     }
 
     private void Update()
     {
-        if(UpdateStat)
+        if (UpdateStat)
         {
             LevelUp();
         }
@@ -110,67 +49,158 @@ public class LevelBaseChara : MonoBehaviour
     private void LevelUp()
     {
         // Generate a random number to determine which stat will level up
-        statIndex = Random.Range(0, 11);
+        statIndex = Random.Range(0, 12);
 
         statName = "";
 
         switch (statIndex)
         {
             case 0:
-                statName = "Health";
-                Increase = 5;
+                if (stats.Health < 10000)
+                {
+                    statName = "Health";
+                    Increase = 5;
+                }
+                else
+                {
+                    statName = "SoulFragments";
+                    Increase = 1;
+                }
                 break;
+
             case 1:
-                statName = "Mana";
-                Increase = 5;
+                if (stats.Mana < 10000)
+                {
+                    statName = "Mana";
+                    Increase = 5;
+                }
+                else
+                {
+                    statName = "SoulFragments";
+                    Increase = 1;
+                }
                 break;
+
             case 2:
-                statName = "Stamina";
-                Increase = 5;
+                if (stats.Stamina < 1000)
+                {
+                    statName = "Stamina";
+                    Increase = 5;
+                }
+                else
+                {
+                    statName = "SoulFragments";
+                    Increase = 1;
+                }
                 break;
+
             case 3:
-                statName = "Vitality";
-                Increase = 0.05f;
+                if (stats.Vitality < 10)
+                {
+                    statName = "Vitality";
+                    Increase = 0.05f;
+                }
+                else
+                {
+                    statName = "Gold";
+                    Increase = 10;
+                }
                 break;
+
             case 4:
-                statName = "Spirit";
-                Increase = 0.05f;
+                if (stats.Spirit < 10)
+                {
+                    statName = "Spirit";
+                    Increase = 0.05f;
+                }
+                else
+                {
+                    statName = "Gold";
+                    Increase = 10;
+                }
                 break;
+
             case 5:
-                statName = "Moxie";
-                Increase = 0.05f;
+                if (stats.Moxie < 10)
+                {
+                    statName = "Moxie";
+                    Increase = 0.05f;
+                }
+                else
+                {
+                    statName = "Gold";
+                    Increase = 10;
+                }
                 break;
+
             case 6:
-                statName = "Power";
-                Increase = 1;
+                if (stats.Power < 99)
+                {
+                    statName = "Power";
+                    Increase = 1;
+                }
+                else
+                {
+                    statName = "Gold";
+                    Increase = 10;
+                }
                 break;
+
             case 7:
-                statName = "Endurance";
-                Increase = 1;
+                if (stats.Endurance < 99)
+                {
+                    statName = "Endurance";
+                    Increase = 1;
+                }
+                else
+                {
+                    statName = "SoulFragments";
+                    Increase = 1;
+                }
                 break;
+
             case 8:
-                statName = "Agility";
-                Increase = 0.25f;
+                if (stats.Agility < 99)
+                {
+                    statName = "Agility";
+                    Increase = 0.25f;
+                }
+                else
+                {
+                    statName = "Gold";
+                    Increase = 10;
+                }
                 break;
+
             case 9:
-                statName = "Luck";
-                Increase = 1;
+                if (stats.Luck < 99)
+                {
+                    statName = "Luck";
+                    Increase = 1;
+                }
+                else
+                {
+                    statName = "SoulFragments";
+                    Increase = 1;
+                }
                 break;
+
             case 10:
                 statName = "SoulFragments";
                 Increase = 1;
                 break;
+
             case 11:
                 statName = "Gold";
                 Increase = 10;
                 break;
+
             default:
                 Debug.LogError("Invalid stat index!");
                 break;
         }
 
         tmpro.text = statName + " + " + Increase.ToString();
-
     }
 
     public void LevelUpStat(string statName)
@@ -183,7 +213,6 @@ public class LevelBaseChara : MonoBehaviour
 
         var field = stats.GetType().GetField(statName);
         if (field != null)
-
         {
             var fieldType = field.FieldType;
 
@@ -213,6 +242,5 @@ public class LevelBaseChara : MonoBehaviour
         ChangeState = false;
         UpdateStat = false;
         Holder.SetActive(false);
-
     }
 }
