@@ -15,6 +15,9 @@ public class HealthBar : MonoBehaviour
     [Header("Blockin")]
     public bool block;
 
+    public GameObject hud;
+    public GameObject DeathScene;
+
     private Slider HealthSlide;
     private Slider ManaSlide;
     private BaseStats bs;
@@ -55,6 +58,18 @@ public class HealthBar : MonoBehaviour
             HealthAmount = HealthMax;
 
         }
+
+        if(HealthAmount <= 0)
+        {
+            OnDeath();
+        }
+    }
+
+    public void OnDeath()
+    {
+        hud.SetActive(false);
+        DeathScene.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void ManaChange()
