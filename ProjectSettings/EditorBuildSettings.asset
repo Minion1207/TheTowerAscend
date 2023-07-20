@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SoulScene.unity
     guid: bd3d9fa7330a650469e8a38806d2e43d
+  - enabled: 1
+    path: Assets/Scenes/VillageScene.unity
+    guid: 550c057b73f73a94b93ae4432dc05ac2
   m_configObjects: {}
